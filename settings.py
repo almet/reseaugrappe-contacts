@@ -1,4 +1,4 @@
-# Django settings for reseaugrappe project.
+# -*- coding: utf-8 -*-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -52,7 +52,7 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = '/home/alex/dev/python/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -61,7 +61,7 @@ STATIC_URL = '/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -96,6 +96,13 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.request",
+    "django.core.context_processors.i18n",
+    'django.contrib.messages.context_processors.messages',
+)
+
 ROOT_URLCONF = 'reseaugrappe.urls'
 
 TEMPLATE_DIRS = (
@@ -111,6 +118,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'grappelli.dashboard',
+    'grappelli',
     'django.contrib.admin',
     'contacts',
 )
@@ -137,3 +146,6 @@ LOGGING = {
         },
     }
 }
+
+GRAPPELLI_INDEX_DASHBOARD = 'reseaugrappe.dashboard.CustomIndexDashboard'
+GRAPPELLI_ADMIN_TITLE = u"Base de données du réseau GRAPPE"

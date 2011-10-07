@@ -4,5 +4,6 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    (r'^grappelli/', include('grappelli.urls')),
     url(r'^', include(admin.site.urls)),
 )

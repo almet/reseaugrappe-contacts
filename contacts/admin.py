@@ -16,6 +16,10 @@ class ContactAdmin(admin.ModelAdmin):
     )
     list_display = ['surname', 'name', 'email', 'cellphone', 'phone']
     list_editable = ['email', 'cellphone', 'phone']
+    save_on_top = True
+    search_fields = ['surname', 'name', 'email', 'cellphone', 'phone', 'based_at', 'description', 'address', 'field']
+
+    list_filter = ('based_at',)
 
 
 class StructureAdmin(ContactAdmin):
@@ -33,6 +37,7 @@ class StructureAdmin(ContactAdmin):
         }),
     )
     list_display = ['structure_name', ] + ContactAdmin.list_display
+    search_fields = ['structure_name', ] + ContactAdmin.search_fields
 
 
 class AnimationAdmin(ContactAdmin):
@@ -50,6 +55,7 @@ class AnimationAdmin(ContactAdmin):
         }),
     )
     list_display = ['title'] + ContactAdmin.list_display + ['cost']
+    search_fields = ['title', ] + ContactAdmin.search_fields
 
 admin.site.register((Radio, Tv, Website, Press, Administration, 
                      Entreprise, Association), StructureAdmin)
