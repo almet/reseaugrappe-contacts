@@ -7,6 +7,7 @@ class ContactAdmin(admin.ModelAdmin):
     fieldsets = (
         ("", {
             'fields': [('surname', 'name'), 
+                       'role',
                        ('phone', 'cellphone'), 
                        'email']
         }),
@@ -14,12 +15,30 @@ class ContactAdmin(admin.ModelAdmin):
             'fields': ['address', 'url', 'field', 'description', 'based_at']
         }),
     )
-    list_display = ['surname', 'name', 'email', 'cellphone', 'phone']
+    list_display = ['surname', 'name', 'role', 'email', 'cellphone', 'phone']
     list_editable = ['email', 'cellphone', 'phone']
     save_on_top = True
     search_fields = ['surname', 'name', 'email', 'cellphone', 'phone', 'based_at', 'description', 'address', 'field']
 
     list_filter = ('based_at',)
+
+
+class GrappeAdmin(ContactAdmin):
+    fieldsets = (
+        ("", {
+            'fields': [('surname', 'name'), 
+                       ('role', 'association'),
+                       ('phone', 'cellphone'), 
+                       'email']
+        }),
+        (u"Autres informations (détails)", {
+            'fields': ['address', 'url', 'field', 'description', 'based_at']
+        }),
+    )
+    list_display = ['surname', 'name', 'association', 'role', 'email', 'cellphone', 'phone']
+    search_fields = ['surname', 'name', 'email', 'cellphone', 'phone', 'based_at', 'description', 'address', 'field', 'association']
+
+    list_filter = ('based_at', 'association')
 
 
 class StructureAdmin(ContactAdmin):
@@ -28,6 +47,7 @@ class StructureAdmin(ContactAdmin):
         ("", {
             'fields': ['structure_name',
                        ('surname', 'name'), 
+                       'role',
                        ('phone', 'cellphone'), 
                        'email']
         }),
@@ -46,6 +66,7 @@ class AnimationAdmin(ContactAdmin):
         ("", {
             'fields': [('title', 'cost'),
                        ('surname', 'name'), 
+                       'role',
                        ('phone', 'cellphone'), 
                        'email']
         }),
@@ -60,4 +81,4 @@ class AnimationAdmin(ContactAdmin):
 admin.site.register((Radio, Tv, Website, Press, Administration, 
                      Entreprise, Association), StructureAdmin)
 admin.site.register((Conf, Film, AnimPedago, Musique, Exposition), AnimationAdmin)
-admin.site.register(ContactGrappe, ContactAdmin)
+admin.site.register(ContactGrappe, GrappeAdmin)

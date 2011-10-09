@@ -45,6 +45,8 @@ class Animation(Contact):
 
 class ContactGrappe(Contact):
 
+    association = models.CharField("Association", max_length=500)
+
     class Meta:
         verbose_name_plural = "Grappuleux"
 
