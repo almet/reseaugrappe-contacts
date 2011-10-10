@@ -18,6 +18,7 @@ class Contact(models.Model):
 
     class Meta:
         ordering = ['-pub_date']
+        abstract = True
 
 
 class Structure(Contact):
