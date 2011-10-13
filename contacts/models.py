@@ -23,7 +23,7 @@ class Contact(models.Model):
 
 class Structure(Contact):
     structure_name = models.CharField("Structure", max_length=500)
-    contact_grappe = models.ForeignKey('ContactGrappe', to_field='id', blank=True, null=True)
+    contact_grappe = models.ForeignKey('ContactGrappe', to_field='id')
 
     class Meta:
         ordering = ['-pub_date', 'structure_name']
@@ -35,7 +35,7 @@ class Structure(Contact):
 class Animation(Contact):
     title = models.CharField("Titre", max_length=500)
     cost = models.IntegerField(u"Coût")
-    contact_grappe = models.ForeignKey('ContactGrappe', to_field='id', blank=True, null=True)
+    contact_grappe = models.ForeignKey('ContactGrappe', to_field='id')
 
     class Meta:
         ordering = ['-pub_date', 'title']
