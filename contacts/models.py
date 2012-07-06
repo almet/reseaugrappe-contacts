@@ -1,6 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 
+AMAP_CHOICES = (('orga', 'organisation'),
+                ('commission', 'commission'),
+                ('participant', 'participant'))
+
+
 class Contact(models.Model):
 
     name = models.CharField("Nom", max_length=500, blank=True)
@@ -15,10 +20,19 @@ class Contact(models.Model):
     description = models.TextField("Description", blank=True)
     based_at = models.CharField("Basé à", help_text="lieu ou le contact est basé", max_length=500, blank=True)
     pub_date = models.DateField(auto_now_add=True, auto_now=True, blank=True, null=True)
+    amap = models.CharField("Participe aux rencontres AMAP", max_length=200, choices=AMAP_CHOICES, blank=True, null=True)
 
     class Meta:
         ordering = ['-pub_date']
-        abstract = True
+#        abstract = True
+
+
+class RencontresAMAP(Contact):
+    structure_name = models.CharField("Structure", max_length=500, blank=True)
+    contact_grappe = models.ForeignKey('ContactGrappe', to_field='id')
+    orga = models.BooleanField('Organisateur?')
+    atelier = models.BooleanField('Comission Ateliers?')
+    participant = models.BooleanField('Participe?')
 
 
 class Structure(Contact):
